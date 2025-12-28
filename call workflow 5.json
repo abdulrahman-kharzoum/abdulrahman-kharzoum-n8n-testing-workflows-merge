@@ -15,63 +15,56 @@
       "name": "Edit Fields"
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
-        -96,
-        64
+        416,
+        0
       ],
-      "id": "d25d6c11-c401-406c-97b1-cc06ea515e51",
-      "name": "When clicking ‘Execute workflow’"
+      "id": "705cfe67-4304-4613-8779-c2f86cfb35bd",
+      "name": "Code in JavaScript"
     },
     {
       "parameters": {
-        "workflowId": {
-          "__rl": true,
-          "value": "Z5SIgielsvB18uFX",
-          "mode": "list",
-          "cachedResultUrl": "/workflow/Z5SIgielsvB18uFX",
-          "cachedResultName": "My workflow 5"
-        },
         "workflowInputs": {
-          "mappingMode": "defineBelow",
-          "value": {},
-          "matchingColumns": [],
-          "schema": [],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": true
-        },
-        "options": {}
+          "values": [
+            {
+              "name": "name"
+            }
+          ]
+        }
       },
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1.3,
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
       "position": [
-        496,
+        0,
         0
       ],
-      "id": "6f199275-f612-4308-a890-cc06d92b309c",
-      "name": "Call 'My workflow 5'"
+      "id": "0ab90b27-ad48-498e-8000-5763a05985c4",
+      "name": "When Executed by Another Workflow"
     }
   ],
   "pinData": {},
   "connections": {
-    "When clicking ‘Execute workflow’": {
+    "Edit Fields": {
       "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "Code in JavaScript",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Edit Fields": {
+    "When Executed by Another Workflow": {
       "main": [
         [
           {
-            "node": "Call 'My workflow 5'",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
